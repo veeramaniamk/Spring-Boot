@@ -16,44 +16,44 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import org.springframework.security.core.userdetails.User;
 
-@Configuration
-@EnableWebSecurity
+// @Configuration
+// @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
-        CustomAuthenticationFilter filter = new CustomAuthenticationFilter(authManager);
-        http.csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .addFilterAt(new CustomAuthenticationFilter(authManager), UsernamePasswordAuthenticationFilter.class)
-            .addFilterAfter(new JwtAuthorizationFilter(), CustomAuthenticationFilter.class)
-            .authorizeRequests()
-            .requestMatchers("/api/login").permitAll()
-            .anyRequest().authenticated();
-        return http.build();
-    }
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+    //     CustomAuthenticationFilter filter = new CustomAuthenticationFilter(authManager);
+    //     http.csrf().disable()
+    //         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    //         .and()
+    //         .addFilterAt(new CustomAuthenticationFilter(authManager), UsernamePasswordAuthenticationFilter.class)
+    //         .addFilterAfter(new JwtAuthorizationFilter(), CustomAuthenticationFilter.class)
+    //         .authorizeRequests()
+    //         .requestMatchers("/api/login").permitAll()
+    //         .anyRequest().authenticated();
+    //     return http.build();
+    // }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("veer").password(passwordEncoder().encode("veer123")).roles("USER").build(),
-                User.withUsername("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN").build()
-        );
-    }
+    // @Bean
+    // public UserDetailsService userDetailsService() {
+    //     return new InMemoryUserDetailsManager(
+    //             User.withUsername("veer").password(passwordEncoder().encode("veer123")).roles("USER").build(),
+    //             User.withUsername("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN").build()
+    //     );
+    // }
 
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                   .userDetailsService(userDetailsService())
-                   .passwordEncoder(passwordEncoder())
-                   .and()
-                   .build();
-    }
+    // @Bean
+    // public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+    //     return http.getSharedObject(AuthenticationManagerBuilder.class)
+    //                .userDetailsService(userDetailsService())
+    //                .passwordEncoder(passwordEncoder())
+    //                .and()
+    //                .build();
+    // }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    // @Bean
+    // public PasswordEncoder passwordEncoder() {
+    //     return new BCryptPasswordEncoder();
+    // }
     
 }
