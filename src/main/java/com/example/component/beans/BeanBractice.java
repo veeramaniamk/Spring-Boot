@@ -9,17 +9,9 @@ import com.example.uril.Constance;
 // import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Order(2)
 public class BeanBractice {
     
-    
-   //  public BeanBractice() {
-   //     Constance.println("BeanPractice Empty Constructor Called");
-   //  }
-
-   //  public BeanBractice(String s) {
-   //     Constance.println(s);
-   //  }
-
     @Bean("a")
     public String someStringValue2() {
        Constance.println("someStringValue2 fun call from BeanBractice");
