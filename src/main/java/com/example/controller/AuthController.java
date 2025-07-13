@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.uril.Constance;
 
 @RestController
 public class AuthController {
@@ -21,6 +24,9 @@ public class AuthController {
         return "Welcome ADMIN!";
     }
 
-    
+    @Bean
+    public void method() {
+        Constance.println("trying to bean method");
+    }
     
 }
