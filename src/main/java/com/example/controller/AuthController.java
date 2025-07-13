@@ -23,10 +23,5 @@ public class AuthController {
     public String adminEndpoint() {
         return "Welcome ADMIN!";
     }
-
-    @Bean
-    public void method() {
-        Constance.println("trying to bean method");
-    }
     
 }

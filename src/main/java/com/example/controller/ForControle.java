@@ -8,9 +8,5 @@ import com.example.uril.Constance;
 @Controller
 public class ForControle {
     
-     @Bean
-    public void method1() {
-        Constance.println("trying to bean on forcontrole");
-    }
-
+    
 }

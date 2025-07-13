@@ -3,6 +3,7 @@ package com.example.component.beans;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import com.example.uril.Constance;
 
@@ -10,9 +11,9 @@ import com.example.uril.Constance;
 public class BeanConfiguration {
 
 
-    public BeanConfiguration() {
-        Constance.println("BeanConfiguration Empty Constructor Called");
-    }
+    // public BeanConfiguration() {
+    //     Constance.println("BeanConfiguration Empty Constructor Called");
+    // }
 
     @Bean
     @Qualifier("value2")
@@ -26,8 +27,8 @@ public class BeanConfiguration {
     }
     
     @Bean("value2")
-    public BeanPractice getBeanConfig(@Qualifier("value2") String someStringValue) {
-        return new BeanPractice(someStringValue);
+    public BeanBractice getBeanConfig(@Qualifier("value2") String someStringValue) {
+        return new BeanBractice();
     }
     
 }
