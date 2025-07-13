@@ -3,11 +3,16 @@ package com.example.component.beans;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+
+import com.example.uril.Constance;
 
 @Configuration
 public class BeanConfiguration {
 
+
+    public BeanConfiguration() {
+        Constance.println("BeanConfiguration Empty Constructor Called");
+    }
 
     @Bean
     @Qualifier("value2")
