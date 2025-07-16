@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.example.controller.AuthController;
 import com.example.exception.AuthException;
 
 @ControllerAdvice(assignableTypes = AuthException.class)
@@ -26,3 +25,4 @@ public class SpecificExceptionHanlder {
     }
 
 }
+

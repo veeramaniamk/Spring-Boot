@@ -1,4 +1,4 @@
-package com.example.uril;
+package com.example.util;
 
 public class Constance {
     
