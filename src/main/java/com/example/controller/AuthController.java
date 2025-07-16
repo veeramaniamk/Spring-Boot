@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 // import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,16 @@ public class AuthController {
         return "Hello, authenticated USER!";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboardEndpoint() {
+        return "Hello, from the DASHBOARD!";
+    }
+
     @GetMapping("/admin")
-    public String adminEndpoint() {
-        return "Welcome ADMIN!";
+    public ResponseEntity<Void> adminEndpoint() {
+        return ResponseEntity.status(302)
+                .header("Location", "/dashboard")
+                .build();
     }
 
     @GetMapping("/")
