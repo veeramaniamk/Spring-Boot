@@ -1,7 +1,11 @@
 package com.example.authentication;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
 // import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
 // import org.springframework.security.authentication.AuthenticationManager;
 // import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 // import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,8 +20,8 @@ package com.example.authentication;
 
 // import org.springframework.security.core.userdetails.User;
 
-// @Configuration
 // @EnableWebSecurity
+@Configuration
 public class SecurityConfig {
 
     // @Bean
@@ -55,5 +59,18 @@ public class SecurityConfig {
     // public PasswordEncoder passwordEncoder() {
     //     return new BCryptPasswordEncoder();
     // }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable()
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/create-user").authenticated() // Require login
+                .anyRequest().permitAll()
+            )
+            .httpBasic(); // Enable basic auth
+
+        return http.build();
+    }
     
 }
