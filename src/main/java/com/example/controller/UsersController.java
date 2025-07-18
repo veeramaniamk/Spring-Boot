@@ -30,7 +30,9 @@ public class UsersController {
 
     @DeleteMapping("/{userId}")
     private String deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+        if(userService.deleteUser(userId)==0) {
+            return "User Not Found";
+        }
         return "User Deleted";
     }
     

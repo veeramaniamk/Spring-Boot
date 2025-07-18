@@ -16,8 +16,8 @@ public class UserService {
         return usersRepository.save(new Users(name, email));
     }
 
-    public void deleteUser(long userId) {
-        usersRepository.deleteById(userId);
+    public int deleteUser(long userId) {
+        return usersRepository.deleteUserById(userId);
     }
 
 }
