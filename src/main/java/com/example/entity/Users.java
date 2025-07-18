@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 @Entity
 public class Users {
 
+    public Users() {
+    }
+
     public Users(String name, String email) {
         this.name = name;
         this.email = email;
