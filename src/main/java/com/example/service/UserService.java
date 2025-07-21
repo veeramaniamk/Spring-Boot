@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class UserService {
 
     public boolean updateUser(long userId, Users user) {
         return 0<usersRepository.updateUserById(userId, user.getName(), user.getEmail());
+    }
+
+    public List<Users> getAllUsers() {
+        return usersRepository.findAll();
     }
 
 }

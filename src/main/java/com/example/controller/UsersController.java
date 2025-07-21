@@ -1,13 +1,14 @@
 package com.example.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -70,5 +71,23 @@ public class UsersController {
         }
         
     }
-    
+
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getAllUsers() {
+
+        Map<String, Object> resData = new HashMap<>();
+        List<Users> users = userService.getAllUsers();
+        if(users.isEmpty()) {
+            resData.put("status", 404);
+            resData.put("message", "No User Found");
+            return new ResponseEntity<>(resData, HttpStatus.NOT_FOUND);
+        }
+
+        resData.put("status", 200);
+        resData.put("message", "Success");
+        resData.put("data", users);
+        return new ResponseEntity<>(resData, HttpStatus.OK);
+
+    }    
+
 }
