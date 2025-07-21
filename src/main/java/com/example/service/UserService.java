@@ -20,8 +20,8 @@ public class UserService {
         return usersRepository.deleteUserById(userId);
     }
 
-    public void updateUser(long userId) {
-        
+    public boolean updateUser(long userId, Users user) {
+        return 0<usersRepository.updateUserById(userId, user.getName(), user.getEmail());
     }
 
 }

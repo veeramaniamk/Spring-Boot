@@ -48,12 +48,27 @@ public class UsersController {
     @PutMapping("/{userId}")
     private ResponseEntity<Map<String, Object>> updateUser(@PathVariable long userId, @RequestBody Users user) {
 
-        Map<String, Object> resData = new HashMap<>();
-        resData.put("status", 200);
-        resData.put("message", "User Updated Successfully");
-        ResponseEntity<Map<String, Object>> res = new ResponseEntity<>(resData, HttpStatus.OK);
 
-        return res;
+        Map<String, Object> resData = new HashMap<>();
+
+        if(user.getName() == null || user.getName()==null) {
+            resData.put("status", 400);
+            resData.put("message", "Bad Request");
+            return new ResponseEntity<>(resData, HttpStatus.BAD_REQUEST);
+        }
+
+        boolean isUpdated = userService.updateUser(userId, user);
+
+        if(isUpdated) {
+            resData.put("status", 200);
+            resData.put("message", "User Updated Successfully");
+            return new ResponseEntity<>(resData, HttpStatus.OK);
+        } else {
+            resData.put("status", 404);
+            resData.put("message", "User Not Found");
+            return new ResponseEntity<>(resData, HttpStatus.NOT_FOUND);
+        }
+        
     }
     
 }
