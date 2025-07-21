@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -87,7 +88,23 @@ public class UsersController {
         resData.put("message", "Success");
         resData.put("data", users);
         return new ResponseEntity<>(resData, HttpStatus.OK);
-
     }    
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<Map<String, Object>> getUserById(@PathVariable long userId) {
+        Map<String, Object> resData = new HashMap<>();
+
+        Optional<Users> users = userService.getUserById(userId);
+        if(users.isEmpty()) {
+            resData.put("status", 404);
+            resData.put("message", "No User Found");
+            return new ResponseEntity<>(resData, HttpStatus.NOT_FOUND);
+        }
+
+        resData.put("status", 200);
+        resData.put("message", "Success");
+        resData.put("data", users.get());
+        return new ResponseEntity<>(resData, HttpStatus.OK);
+    }
 
 }
